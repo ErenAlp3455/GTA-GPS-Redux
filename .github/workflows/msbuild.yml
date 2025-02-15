@@ -21,10 +21,11 @@ env:
     # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     BUILD_CONFIGURATION: GitHub
 
-    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GH_TOKEN: ${{ github.token }}
 
 permissions:
-    contents: read
+    contents: write
+    packages: write
 
 jobs:
     build:
