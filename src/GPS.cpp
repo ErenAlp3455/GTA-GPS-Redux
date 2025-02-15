@@ -303,9 +303,11 @@ constexpr void GPS::renderMissionTrace(tRadarTrace *trace)
 		return;
 	}
 
+	CVector currentDestVec;
+
 	switch (trace->m_nBlipType)
 	{
-		case 1:
+	case 1:
 		if (cfg.ENABLE_MOVING) {
 			currentDestVec = CPools::GetVehicle(trace->m_nEntityHandle)->GetPosition();
 			this->calculatePath(currentDestVec, missionNodesCount, m_ResultNodes, missionDistance);
