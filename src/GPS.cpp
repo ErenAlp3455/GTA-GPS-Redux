@@ -305,26 +305,18 @@ constexpr void GPS::renderMissionTrace(tRadarTrace *trace)
 
 	switch (trace->m_nBlipType)
 	{
-	case 1:
-		if (cfg.ENABLE_MOVING)
-		{
-			destVec = CPools::GetVehicle(trace->m_nEntityHandle)->GetPosition();
-		}
-		else
-		{
-			renderMissionRoute = false;
-			return;
+		case 1:
+		if (cfg.ENABLE_MOVING) {
+			currentDestVec = CPools::GetVehicle(trace->m_nEntityHandle)->GetPosition();
+			this->calculatePath(currentDestVec, missionNodesCount, m_ResultNodes, missionDistance);
+			this->renderPath(currentDestVec, trace->m_nColour, trace->m_bFriendly, missionNodesCount, m_ResultNodes, missionDistance, m_LineVerts);
 		}
 		break;
 	case 2:
-		if (cfg.ENABLE_MOVING)
-		{
-			destVec = CPools::GetPed(trace->m_nEntityHandle)->GetPosition();
-		}
-		else
-		{
-			renderMissionRoute = false;
-			return;
+		if (cfg.ENABLE_MOVING) {
+			currentDestVec = CPools::GetPed(trace->m_nEntityHandle)->GetPosition();
+			this->calculatePath(currentDestVec, missionNodesCount, m_ResultNodes, missionDistance);
+			this->renderPath(currentDestVec, trace->m_nColour, trace->m_bFriendly, missionNodesCount, m_ResultNodes, missionDistance, m_LineVerts);
 		}
 		break;
 	case 3:
